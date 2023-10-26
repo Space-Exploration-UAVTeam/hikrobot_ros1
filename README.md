@@ -51,8 +51,10 @@ We here give a little more introduction:
 The picture above show how this works with the PX4/Pixhawk Flight Control Unit through mavros. After our camera node send a trigger_enable request, the FCU send the trigger signal to the camera and the time stamp of that signal to the computer. Image data will come to the computer much slower than the time stamp, so we create a buffer for the time stamp and some buffers for the image data. Whenever all buffers contain the new elements, we publish them together.  
 The time delays in the picture is just an example...  
 Set the FCU parameters in QGC:  
+ <img src="https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture2.png" width="200" />  
+
 ![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture2.png)
-![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture3.png)
+![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture3.png)  
 Trigger mode: Time based, on commnad;  
 AUX Pins are the output of the trigger signal to the camera；  
 Both TRIG_ACT_TIME 与 TRIG_INTERVAL(camera frequency determined) are needed， where the former should be smaller than the later, of course.  
