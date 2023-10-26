@@ -48,7 +48,7 @@ roslaunch hikrobot MvCameraPub_Trigger.launch
 Following the PX4 camera trigger instruction https://docs.px4.io/v1.13/en/peripherals/camera.html  
 We here give a little more introduction:
 ![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture1.png)
-the picture above show how this works with the PX4/Pixhawk Flight Control Unit through mavros. After our camera node send a trigger_enable request, the FCU send the trigger signal to the camera and the time stamp of that signal to the computer. Image data will come to the computer much slower than the time stamp, so we create a buffer for the time stamp and some buffers for the image data. Whenever all buffers contain the new elements, we publish them together.  
+The picture above show how this works with the PX4/Pixhawk Flight Control Unit through mavros. After our camera node send a trigger_enable request, the FCU send the trigger signal to the camera and the time stamp of that signal to the computer. Image data will come to the computer much slower than the time stamp, so we create a buffer for the time stamp and some buffers for the image data. Whenever all buffers contain the new elements, we publish them together.  
 The time delays in the picture is just an example...  
 Set the FCU parameters in QGC:  
 ![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture2.png)
