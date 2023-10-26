@@ -55,7 +55,7 @@ Set the FCU parameters in QGC:
  <img src="https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture3.png" width="400" />  
 Trigger mode: Time based, on commnad;  
 AUX Pins are the output of the trigger signal to the camera；  
-Both TRIG_ACT_TIME 与 TRIG_INTERVAL(camera frequency determined) are needed， where the former should be smaller than the later, of course.  
+Both TRIG_ACT_TIME 与 TRIG_INTERVAL(camera frequency) are needed， where the former should be smaller than the later, of course.  
 Reboot the FCU to active the parameters.  
 Use A wire to connect a Signal pin of the AUX Pins and the trigger pin of hikrobot camera; If you have multiple cameras, we suggest you still connect the wires to A Signal pin, not multiple Signal pins.  
 The camera must be grounded. If you use all these on a drone or other moving paltform, you should be careful about that.  
