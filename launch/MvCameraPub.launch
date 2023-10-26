@@ -1,0 +1,7 @@
+<launch>
+    <node name="MvCameraPub" pkg="hikrobot" type="MvCameraPub" output="screen">
+    </node>
+
+    <node name="Brightness_Count" pkg="hikrobot" type="Brightness_Count" output="screen">
+    </node>
+</launch>

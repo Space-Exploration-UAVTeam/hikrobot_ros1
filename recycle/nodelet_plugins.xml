@@ -1,0 +1,4 @@
+<library path="lib/libMvCameraPub_nodelet_Multiple_Trigger">
+  <class name="MvCameraPub_nodelet/MvCameraPub_nodelet_Multiple_Trigger" type="MvCameraPub_nodelet::MvCameraPub_nodelet_Multiple_Trigger" base_class_type="nodelet::Nodelet">
+  </class>
+</library>
