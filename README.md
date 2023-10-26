@@ -24,7 +24,6 @@ cd ~/catkin_ws/
 catkin_make
 source ~/catkin_ws/devel/setup.bash
 ```
-If you encounter any problem in prerequisites or building, we recommend you to try docker first.
 
 ## 3. Run
 ### 1.1 Single camera, with stand alone exposure time calculating
@@ -41,13 +40,25 @@ roslaunch hikrobot MvCameraPub_Multiple.launch
 ```
 ### 1.4 Multiple cameras, with stand alone exposure time calculating and hardware triggering
 ```
+roslaunch mavros px4.launch
 roslaunch hikrobot MvCameraPub_Trigger.launch
 ```
 
 ## 4. Hardware triggering
 Following the PX4 camera trigger instruction https://docs.px4.io/v1.13/en/peripherals/camera.html
 We here give a little more introduction:
-
+![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture1.png)
+the picture above show how this works with the PX4/Pixhawk Flight Control Unit through mavros. After our camera node send a trigger_enable request, the FCU send the trigger signal to the camera and the time stamp of that signal to the computer. Image data will come to the computer much slower than the time stamp, so we create a buffer for the time stamp and some buffers for the image data. Whenever all buffers contain the new elements, we publish them together.
+The time delays in the picture is just an example...
+Set the FCU parameters in QGC:
+![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture2.png)
+![image](https://github.com/Space-Exploration-UAVTeam/hikrobot_ros1/blob/master/img/Picture3.png)
+Trigger mode: Time based, on commnad;
+AUX Pins are the output of the trigger signal to the camera；
+Both TRIG_ACT_TIME 与 TRIG_INTERVAL(camera frequency determined) are needed， where the former should be smaller than the later, of course.
+Reboot the FCU to active the parameters.
+Use A wire to connect a Signal pin of the AUX Pins and the trigger pin of hikrobot camera; If you have multiple cameras, we suggest you still connect the wires to A Signal pin, not multiple Signal pins.
+The camera must connect be grounded. If you use all these on a drone like us, you should be careful about that.
 
 ## 5. Licence
 The source code is released under BSD 3-Clause license.
