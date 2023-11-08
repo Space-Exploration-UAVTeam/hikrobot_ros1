@@ -10,6 +10,8 @@
 using namespace cv; 
 using namespace std;
 #define MAX_BUF_SIZE    (1280*1024*3)
+int Exposure_Time;
+ros::Subscriber exposure_time_sub_;
 
 bool PrintDeviceInfo(MV_CC_DEVICE_INFO* pstMVDevInfo)
 {
@@ -50,7 +52,8 @@ int main(int argc, char **argv)
     // ROS_INFO("process start!");
     image_transport::ImageTransport it(n);
     image_transport::Publisher left_pub = it.advertise("/hikrobot/image_left", 1);
-	image_transport::Publisher right_pub = it.advertise("/hikrobot/image_right", 1);
+    image_transport::Publisher right_pub = it.advertise("/hikrobot/image_right", 1);
+    exposure_time_sub_ = n.subscribe("/hikrobot/exposure", 1, exposure_callback);
     sensor_msgs::ImagePtr mMsg;
     sensor_msgs::ImagePtr nMsg;
     std_msgs::Header header;
@@ -113,7 +116,7 @@ int main(int argc, char **argv)
 	//mRet = MV_CC_SetAutoExposureTimeLower(m_handle, 4567);
 	//mRet = MV_CC_SetAutoExposureTimeUpper(m_handle, 99999);
 	// //手动设置初始曝光		
-	mRet = MV_CC_SetExposureTime(m_handle, 25000);//室外下午500，室内25000
+	//mRet = MV_CC_SetExposureTime(m_handle, 25000);//室外下午500，室内25000
 	//开始采集图像
 	mRet = MV_CC_StartGrabbing(m_handle);
 	if (mRet != 0)
@@ -135,6 +138,7 @@ int main(int argc, char **argv)
 		// {
 		// 	break;
 		// }
+		mRet = MV_CC_SetExposureTime(m_handle, Exposure_Time);
 		mRet = MV_CC_GetImageForBGR(m_handle, mFrameBuf, nBufSize, &stInfo, 1000);
 		// mRet = MV_CC_GetOneFrameTimeout(m_handle, mFrameBuf, nBufSize, &stInfo, 1000);
 		if (mRet != 0)
